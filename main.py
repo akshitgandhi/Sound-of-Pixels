@@ -373,11 +373,11 @@ def train(netWrapper, loader, optimizer, history, epoch, args):
 
     # main loop
     torch.cuda.synchronize()
-    tic = time.perf_counter()
+    tic = time.time()
     for i, batch_data in enumerate(loader):
         # measure data time
         torch.cuda.synchronize()
-        data_time.update(time.perf_counter() - tic)
+        data_time.update(time.time() - tic)
 
         # forward pass
         netWrapper.zero_grad()
@@ -390,7 +390,7 @@ def train(netWrapper, loader, optimizer, history, epoch, args):
 
         # measure total time
         torch.cuda.synchronize()
-        batch_time.update(time.perf_counter() - tic)
+        batch_time.update(time.time() - tic)
         tic = time.perf_counter()
 
         # display
