@@ -1,0 +1,2 @@
+python scripts/create_index_files.py --root_audio /mnt/data/data/project_data/audio/ --root_frame /mnt/data/data/project_data/frames/ --fps 30 --path_output /mnt/data/data/project_data/
+
