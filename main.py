@@ -380,6 +380,7 @@ def train(netWrapper, loader, optimizer, history, epoch, args):
         data_time.update(time.time() - tic)
 
         # forward pass
+        print("Doing forward pass")
         netWrapper.zero_grad()
         err, _ = netWrapper.forward(batch_data, args)
         err = err.mean()
@@ -511,6 +512,7 @@ def main(args):
 
     # Training loop
     for epoch in range(1, args.num_epoch + 1):
+        print("Training.........")
         train(netWrapper, loader_train, optimizer, history, epoch, args)
 
         # Evaluation and visualization
