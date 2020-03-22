@@ -43,4 +43,4 @@ OPTS+="--disp_iter 20 "
 OPTS+="--num_vis 40 "
 OPTS+="--num_val 256 "
 
-python3 -u main.py $OPTS
+python -u main.py $OPTS
