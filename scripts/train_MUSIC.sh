@@ -2,8 +2,8 @@
 
 OPTS=""
 OPTS+="--id MUSIC "
-OPTS+="--list_train data/train.csv "
-OPTS+="--list_val data/val.csv "
+OPTS+="--list_train /mnt/data/data/project_data/train.csv "
+OPTS+="--list_val /mnt/data/data/project_data/val.csv "
 
 # Models
 OPTS+="--arch_sound unet7 "
@@ -43,4 +43,4 @@ OPTS+="--disp_iter 20 "
 OPTS+="--num_vis 40 "
 OPTS+="--num_val 256 "
 
-python -u main.py $OPTS
+python3 -u main.py $OPTS

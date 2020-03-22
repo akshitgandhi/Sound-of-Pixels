@@ -492,7 +492,7 @@ def main(args):
 
     # Wrap networks
     netWrapper = NetWrapper(nets, crit)
-    netWrapper = torch.nn.DataParallel(netWrapper, device_ids=range(args.num_gpus))
+    netWrapper = torch.nn.DataParallel(netWrapper)
     netWrapper.to(args.device)
 
     # Set up optimizer
