@@ -129,7 +129,7 @@ class BaseDataset(torchdata.Dataset):
             # audio_raw *= (2.0**-31)
 
             # convert to mono
-            if audio_raw.shape[1] == 2:
+            if audio_raw.shape[0] == 2:
                 audio_raw = (audio_raw[:, 0] + audio_raw[:, 1]) / 2
             else:
                 audio_raw = audio_raw[:, 0]
