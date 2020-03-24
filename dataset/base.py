@@ -7,6 +7,7 @@ from torchvision import transforms
 import torchaudio
 import librosa
 from PIL import Image
+import os
 
 from . import video_transforms as vtransforms
 
@@ -121,20 +122,36 @@ class BaseDataset(torchdata.Dataset):
         return torch.from_numpy(amp), torch.from_numpy(phase)
 
     def _load_audio_file(self, path):
-        if path.endswith('.mp3'):
-            audio_raw, rate = torchaudio.load(path)
-            audio_raw = audio_raw.numpy().astype(np.float32)
+        assert(path.endswith('.mp3'))
+        
+        audio_raw, rate = torchaudio.load(path, normalization=True) #Quan added normalization=True
+        audio_raw = audio_raw.numpy().astype(np.float32)
 
-            # range to [-1, 1]
-            # audio_raw *= (2.0**-31)
+        # range to [-1, 1]
+        # audio_raw *= (2.0**-31) #Quan commented this one. It does not convert audio_raw to [-1,1] by multiply it with 2^-31 at all. By default,
+        # normalization = true, so the torchaudio.load() function automatically normalizes everything to be in the range [-1, 1] already.
+        # See https://pytorch.org/audio/#torchaudio.load
 
-            # convert to mono
+        # convert to mono
+
+        assert(audio_raw.shape[0] <= 2 or audio_raw.shape[1] <= 2)
+
+        # if audio_raw.shape[1] == 2:
+        #     audio_raw = (audio_raw[:, 0] + audio_raw[:, 1]) / 2
+        # else:
+        #     audio_raw = audio_raw[:, 0]
+
+        if audio_raw.shape[1] < 2:
+            if audio_raw.shape[1] == 2:
+                audio_raw = (audio_raw[:, 0] + audio_raw[:, 1]) / 2
+            else:
+                audio_raw = audio_raw[:, 0]
+        else:
+            assert(audio_raw.shape[0] <= 2)
             if audio_raw.shape[0] == 2:
                 audio_raw = (audio_raw[0, :] + audio_raw[1, :]) / 2
             else:
-                audio_raw = audio_raw[0,:]
-        else:
-            audio_raw, rate = librosa.load(path, sr=None, mono=True)
+                audio_raw = audio_raw[0, :]
 
         return audio_raw, rate
 

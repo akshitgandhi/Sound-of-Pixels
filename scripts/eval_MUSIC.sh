@@ -23,10 +23,10 @@ OPTS+="--log_freq 1 "
 # frames-related
 OPTS+="--num_frames 3 "
 OPTS+="--stride_frames 24 "
-OPTS+="--frameRate 8 "
+OPTS+="--frameRate 30 "
 
 # audio-related
 OPTS+="--audLen 65535 "
-OPTS+="--audRate 11025 "
+OPTS+="--audRate 44100 "
 
 python -u main.py $OPTS
