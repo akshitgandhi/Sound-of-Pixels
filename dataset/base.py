@@ -126,7 +126,7 @@ class BaseDataset(torchdata.Dataset):
             audio_raw = audio_raw.numpy().astype(np.float32)
 
             # range to [-1, 1]
-            audio_raw *= (2.0**-31)
+            # audio_raw *= (2.0**-31)
 
             # convert to mono
             if audio_raw.shape[1] == 2:
