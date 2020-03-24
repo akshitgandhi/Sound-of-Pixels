@@ -23,7 +23,7 @@ OPTS+="--log_freq 1 "
 # frames-related
 OPTS+="--num_frames 3 "
 OPTS+="--stride_frames 24 "
-OPTS+="--frameRate 30 "
+OPTS+="--frameRate 8 "
 
 # audio-related
 OPTS+="--audLen 65535 "
